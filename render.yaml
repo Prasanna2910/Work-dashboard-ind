@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: work-dashboard-backend
+    env: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: APP_NAME
+        value: Work Productivity Dashboard API
+      - key: APP_ENV
+        value: production
+      - key: API_V1_PREFIX
+        value: /api/v1
+      - key: MONGO_URI
+        sync: false
+      - key: MONGO_DB_NAME
+        value: work_dashboard
+      - key: FRONTEND_ORIGINS
+        sync: false
+      - key: FRONTEND_ORIGIN_REGEX
+        sync: false
